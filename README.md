@@ -1,2 +1,2 @@
 # Hackathon-RSOC
-HAkCATHON
+HAKCATHON
