@@ -1,138 +1,165 @@
+/* Reset margin and padding, full height for body */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
+/* Body styles with gradient background */
 body {
-	background: rgb(55,55,55);
-	font-family: sans-serif;
+    background: linear-gradient(45deg, rgb(55, 55, 55), rgb(33, 33, 33));
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    line-height: 1.6;
 }
 
+/* General button styling with hover effects */
 button {
-	background: #06f;
-	box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.5);
-	color: #fff;
-	outline: none;
-	cursor: pointer;
-	text-shadow: 0 1px #06f;
-	display: inline-block;
-	font-size: 16px;
-	line-height: 40px;
+    background: cyan;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.5);
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    text-shadow: 0 1px #06f;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 40px;
     border: none;
-    border-radius: 5px;
-    padding: 5px 20px;
+    border-radius: 25px;
+    padding: 10px 25px;
     margin-left: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+button:hover {
+    background-color: white;
+    transform: scale(1.15);
+	transition: 0.5s all ease;
+}
+
+button:active {
+    background-color: #003366;
+}
+
+/* Styling for canvas element */
 canvas {
-	border-radius: 5px;
-	cursor: url(../img/pen.png), crosshair;
+    border-radius: 10px;
+    cursor: url(../img/pen.png), crosshair;
+    transition: transform 0.3s ease;
 }
 
+/* Making output look more modern */
 output {
-    background: #444;
+    background: rgba(0, 0, 0, 0.8);
     color: #fff;
     border-radius: 5px;
-    padding: 5px;
-    font-weight: 700;
+    padding: 10px;
+    font-weight: bold;
 }
 
+/* Styling unordered list (e.g., for color options) */
 ul {
-	list-style:none;
-	margin: 0;
-	float: 	left;
-	padding: 10px 0 20px;
-	width: 100%;
-	text-align: center;
-}
-
-ul li, #newColor {
-	display:block;
-	height: 54px;
-	width: 54px;
-	border-radius: 20px;
-	cursor: pointer;
-	border: 0;
-	box-shadow: 0 3px 0 0 #222;
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
 }
 
 ul li {
-	display: inline-block;
-	margin: 0 5px 10px;
+    display: inline-block;
+    margin: 0 10px;
 }
 
-
-/* ID Styles */
-
-#addNewColor {
-    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.5);
+ul li, #newColor {
+    height: 54px;
+    width: 54px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 3px 0 0 #222;
+    transition: transform 0.3s ease;
 }
 
-#imageView {
-    position: relative;
-    top: 10px;
-    left: 50%;
-    background: #fff;
+ul li:hover, #newColor:hover {
+    transform: scale(1.1);
 }
 
+/* Styling for the color selection box */
 #colorSelect {
-	background: #fff;
-	border-radius: 5px;
-	clear: both;
-	margin: 20px auto 0;
-	padding: 10px;
-	width: 30%;
-	position: relative;
-	display:none;
+    background: #fff;
+    border-radius: 8px;
+    clear: both;
+    margin: 20px auto;
+    padding: 10px;
+    width: 30%;
+    position: relative;
+    display: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Styling for the color selection dropdown arrow */
 #colorSelect:after {
-	bottom: 100%;
-	left: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(255, 255, 255, 0);
-	border-bottom-color: #fff;
-	border-width: 10px;
-	margin-left: -10px;
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #fff;
+    border-width: 10px;
+    margin-left: -10px;
 }
 
+/* Styling for color select button */
 #colorSelect button {
-	border: none;
-	border-top: 1px solid #ddd;
+    border: none;
+    border-top: 1px solid #ddd;
     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-	border-radius: 0 0 5px 5px;
-	clear: both;
-	margin: 10px 0 -7px;
-	padding: 5px 10px;
-	width: 100%;
+    border-radius: 0 0 8px 8px;
+    margin: 10px 0;
+    padding: 10px 20px;
+    width: 100%;
+    background: #06f;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+#colorSelect button:hover {
+    background-color: #004db3;
+}
+
+/* Container for the drawing board */
 #container {
     position: relative;
 }
 
+/* Controls bar style */
 #controls {
-	min-height: 60px;
-    width: 90%; 
-	margin: 0 auto;
-	border-radius: 5px;
-	overflow: hidden;
+    min-height: 60px;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.7);
 }
 
+/* Current color container style */
 #curcolorContainer {
     text-align: center;
+    padding: 5px 0;
 }
 
 #curcolorContainer div {
     font-weight: bold;
+    font-size: 18px;
 }
 
+/* Help content modal style */
 #helpContent {
     display: none;
     width: 40%;
@@ -154,11 +181,6 @@ ul li {
     z-index: 1000;
 }
 
-#helpContent a, #helpContent a:visited {
-    color: maroon;
-    text-decoration: none;
-}
-
 #helpContentX {
     position: absolute;
     top: -3%;
@@ -168,6 +190,7 @@ ul li {
     background: red;
     color: white;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }
 
 #helpContentX:hover {
@@ -175,110 +198,101 @@ ul li {
     color: red;
 }
 
-#helpInnerContent {
-    padding-right: 20px;
-    height: 80%;
-    overflow-y: scroll;
-}
-
+/* New Color option style */
 #newColor {
-	width: 80px;
-	height: 120px;
-	border-radius: 3px;
-	box-shadow: none;
-	float: left;
-	border: none;
-	margin: 10px 20px 20px 10px;
-
+    width: 80px;
+    height: 120px;
+    border-radius: 8px;
+    margin: 10px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
 }
 
-#optionsHolder {
-    text-align: center;
+#newColor:hover {
+    transform: scale(1.05);
 }
 
-#pen {
-    padding-left: 20px;
-    background-image: url("../img/cursor.png");
-    background-position: center left;
-    background-repeat: no-repeat;
-}
-
-#revealColorSelect {
-	border: none;
-	border-radius: 5px;
-	margin: 10px 0px 10px 20px;
-	padding: 5px 20px;
-}
-
-#sliders p {
-	margin: 8px 0;
-	vertical-align: middle;
-}
-
-#sliders label {
-	display: inline-block;
-	margin: 0 10px 0 0;
-	width: 35px;
-	font-size: 14px;
-	color: #6D574E;
-}
-
-#sliders input {
-	position: relative;
-	top: 2px;
-}
-
-#imageTemp {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-}
-
-#textInput {
-    display: none;
-}
-
+/* Tool belt and size selectors */
 #toolBelt, #toolSize {
     margin-left: 20px;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 15px;
+    border-radius: 8px;
     height: 50px;
+    background: rgba(0, 0, 0, 0.5);
     box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.5);
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Classes */
-
-.colem {
-    color: lime;
+#toolBelt:hover, #toolSize:hover {
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
-.copytext {
-    font-weight: normal;
-}
-
-.selected {
-	border: 7px solid #fff;
-	width: 40px;
-	height: 40px;
-}
-
-.selectedLight {
-	border: 7px solid #000;
-	width: 40px;
-	height: 40px;
-}
-
-/* MEDIA QUERIES */
-
+/* Responsive styles */
 @media screen and (max-width: 1024px) {
     #colorSelect {
-        width: 40%;
+        width: 50%;
     }
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (max-width: 768px) {
     #colorSelect {
-        margin-bottom: 5%;
+        width: 70%;
     }
+}
+
+@media screen and (max-width: 480px) {
+    #colorSelect {
+        width: 90%;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 2px solid #06f;
+    font-size: 14px;
+}
+
+footer a {
+    color: #06f;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+footer {
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	padding: 15px;
+	font-size: 14px;
+	width: 100%;
+	border-top: 2px solid #06f;
+}
+
+footer p {
+	margin: 0;
+}
+
+footer a {
+	color: #06f;
+	text-decoration: none;
+}
+
+footer a:hover {
+	text-decoration: underline;
+}
+.fot{
+	color: #ddd;
+	text-align: center;
+
 }

@@ -8,6 +8,7 @@
     <meta name="description" content="A Collabrative White board">
     <meta name="author" content="devan">
 		  <style type="text/css">
+        
       #container { position: relative; }
       #container{
         width: 1000px;
@@ -50,28 +51,46 @@
 .container .btn.btn-sm:active{
    background: #06f; 
 }
+.heading{
+  color:white;
+  text-align: center;
+}
 label{
     color: #fff;
 }
     </style>
     <!-- Bootstrap -->
+     <link rel="stylesheet" href="style.css">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
 	</head>
     
 	<body style="margin-top:30px;">
 	<div class="container">
-    <div class="alert alert-info" style="padding: 10px !important; margin-bottom: 5px; width:88%">
-      <strong>Socket IO &#10084;</strong>  - This is a Multi-Users Drawing board, Open <a class="linkToBoard" style="cursor:pointer; color: #ff002d;" target="_blank">link</a> in another tab or Open in another computer try drawing simultaneously in both. <strong>Cool, isn't ?</strong>
-    </div>
-        <p style="">
-        <button type="button" class="btn btn-warning btn-sm" value="pencil" id="pencil-button">Pencil</button>
-        <button type="button" class="btn btn-warning btn-sm" value="rect" id="rect-button">Rectangle</button>
-        <button type="button" class="btn btn-warning btn-sm" value="circle" id="circle-button">Circle</button>
-        <button type="button" class="btn btn-warning btn-sm" value="ellipse" id="ellipse-button">Ellipse</button>
-        <button type="button" class="btn btn-warning btn-sm" value="line" id="line-button">Line</button>
-        <button type="button" class="btn btn-warning btn-sm" value="text" id="text-button">Text</button>
-        <button type="button" class="btn btn-warning btn-sm" id="clear-all">Clear All</button>
+    <div class="heading"><h2>Doodle Dash</h2></div>
+        <p style="font-size: larger;">
+          <button type="button" class="btn btn-outline-primary tool-btn" value="pencil" id="pencil-button">
+            
+            <i class="fa-solid fa-pencil"></i>Pencil
+        </button>
+        <button type="button" class="btn btn-outline-danger tool-btn" value="rect" id="rect-button">
+            <i class="far fa-square"></i> Rectangle
+        </button>
+        <button type="button" class="btn btn-outline-success tool-btn" value="circle" id="circle-button">
+            <i class="far fa-circle"></i> Circle
+        </button>
+        <button type="button" class="btn btn-outline-warning tool-btn" value="ellipse" id="ellipse-button">
+            <i class="fas fa-ellipsis-h"></i> Ellipse
+        </button>
+        <button type="button" class="btn btn-outline-info tool-btn" value="line" id="line-button">
+            <i class="fas fa-slash"></i> Line
+        </button>
+        <button type="button" class="btn btn-outline-dark tool-btn" value="text" id="text-button">
+            <i class="fas fa-font"></i> Text
+        </button>
+        <button type="button" class="btn btn-danger tool-btn" id="clear-all">
+            <i class="fas fa-trash-alt"></i> Clear All
+        </button>
         <label for="colour" style="position:absolute;">Colour : </label>
         <input id="colour-picker" value="#000000" style="width:80px;" class="jscolor {width:243, height:150, position:'right',
     borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#666'}">
@@ -141,6 +160,7 @@ label{
         </div>
     </div>
     
+    
 <!-- Script files -->
         <script src='jquery.min.js'></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -156,5 +176,16 @@ label{
       });
     </script>
 
+
+<h3 class="fot">
+  <p>Created by: <a href="https://www.linkedin.com/in/arpit-dhumane-7a235a278/">Arpit Dhumane</a>,
+    <a href="https://www.linkedin.com/in/sheikhwasimuddin">Sheikh Wasimuddin</a>,
+    <a href="https://www.linkedin.com/in/tanmaypatil2109/">Tanmay Patil</a>,
+    <a href="https://www.linkedin.com/in/tejas-kalbande-71b4a3222/">Tejas Kalbande</a>.
+  </p>
+</h3>
 	</body>
+  
+  
+  
 </html>
