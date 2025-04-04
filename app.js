@@ -6,86 +6,55 @@ const port = process.env.PORT || 3001;
 
 app.use(express.static(__dirname + '/public'));
 
-// Initialize undo and redo stacks
-let undoStack = [];
-let redoStack = [];
-
+// Store drawing state to send to new connections
+let drawingHistory = [];
+// Add this to your existing socket events in app.js
+socket.on('shape', function(data) {
+  if (!validateDrawingData(data)) {
+    console.warn('Invalid shape data received');
+    return;
+  }
+  
+  const roomId = socket.handshake.query.roomId || 'default';
+  const room = getRoom(roomId);
+  
+  room.redoStack = [];
+  room.undoStack.push({ type: 'shape', data: data });
+  
+  socket.to(roomId).emit('shape', data);
+  console.log(`[${roomId}] Shape drawn: ${data.tool}`);
+});
 function onConnection(socket) {
-  // Listen to drawing events and add to the undo stack
+  console.log('New client connected');
+  
+  // Send existing drawing history to the new client
+  socket.emit('initialDraw', drawingHistory);
+
+  // Listen to drawing events
   socket.on('drawing', function (data) {
-    undoStack.push({ type: 'drawing', data: data });
-    redoStack = []; // Clear the redo stack whenever a new action is taken
+    drawingHistory.push(data);
     socket.broadcast.emit('drawing', data);
-    console.log(data);
   });
 
-  socket.on('rectangle', function (data) {
-    undoStack.push({ type: 'rectangle', data: data });
-    redoStack = [];
-    socket.broadcast.emit('rectangle', data);
-    console.log(data);
+  // Clear event
+  socket.on('clear', function () {
+    drawingHistory = [];
+    socket.broadcast.emit('clear');
   });
 
-  socket.on('linedraw', function (data) {
-    undoStack.push({ type: 'linedraw', data: data });
-    redoStack = [];
-    socket.broadcast.emit('linedraw', data);
-    console.log(data);
-  });
-
-  socket.on('circledraw', function (data) {
-    undoStack.push({ type: 'circledraw', data: data });
-    redoStack = [];
-    socket.broadcast.emit('circledraw', data);
-    console.log(data);
-  });
-
-  socket.on('ellipsedraw', function (data) {
-    undoStack.push({ type: 'ellipsedraw', data: data });
-    redoStack = [];
-    socket.broadcast.emit('ellipsedraw', data);
-    console.log(data);
-  });
-
-  socket.on('textdraw', function (data) {
-    undoStack.push({ type: 'textdraw', data: data });
-    redoStack = [];
-    socket.broadcast.emit('textdraw', data);
-    console.log(data);
-  });
-
-  socket.on('copyCanvas', function (data) {
-    undoStack.push({ type: 'copyCanvas', data: data });
-    redoStack = [];
-    socket.broadcast.emit('copyCanvas', data);
-    console.log(data);
-  });
-
-  socket.on('Clearboard', function (data) {
-    undoStack.push({ type: 'Clearboard', data: data });
-    redoStack = [];
-    socket.broadcast.emit('Clearboard', data);
-    console.log(data);
-  });
-
-  // Undo event: Move the last action from undoStack to redoStack
+  // Undo event
   socket.on('undo', function () {
-    if (undoStack.length > 0) {
-      const lastAction = undoStack.pop();
-      redoStack.push(lastAction);
-      socket.broadcast.emit('undo', lastAction);
-      console.log('Undo:', lastAction);
+    if (drawingHistory.length > 0) {
+      drawingHistory.pop();
+      // Send the entire history for simplicity
+      io.emit('initialDraw', drawingHistory);
     }
   });
 
-  // Redo event: Move the last undone action from redoStack to undoStack
-  socket.on('redo', function () {
-    if (redoStack.length > 0) {
-      const lastUndoneAction = redoStack.pop();
-      undoStack.push(lastUndoneAction);
-      socket.broadcast.emit('redo', lastUndoneAction);
-      console.log('Redo:', lastUndoneAction);
-    }
+  // Sync canvas
+  socket.on('syncCanvas', function (history) {
+    drawingHistory = history;
+    socket.broadcast.emit('initialDraw', drawingHistory);
   });
 }
 

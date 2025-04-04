@@ -1,191 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>White Board</title>
-        <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A Collabrative White board">
-    <meta name="author" content="devan">
-		  <style type="text/css">
-        
-      #container { position: relative; }
-      #container{
-        width: 1000px;
-        height: 500px;
-        background-color: #fff;
-        border-radius: 5px;
-      }
-      body{
-        background: rgb(55,55,55) !important;
-      }
-      #imageView { border: 1px solid #000; }
-      #imageTemp { position: absolute; top: 1px; left: 1px; }
-      canvas {
-        border-radius: 5px;
-        cursor: url(../img/pen.png), crosshair;
+<head>
+  <meta charset="utf-8">
+  <title>Doodle Dash</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A collaborative whiteboard application">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico">
+  
+  <!-- Bootstrap & FontAwesome -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="icon" href="https://i.ibb.co/vvQ8Zt0F/doodle-dash.jpg" alt="doodle-dash" border="0">>
+  <style>
+    :root {
+      --primary-color: #4285f4;
+      --danger-color: #ea4335;
+      --success-color: #34a853;
+      --warning-color: #fbbc05;
+      --dark-color: #2c2f33;
+      --light-color: #f8f9fa;
     }
-    #text_tool {
-    position: absolute;
-    border: 1px dashed black;
-    outline: 0;
-    z-index:1000 !important;
-    display: none;
-    overflow: hidden;
-    white-space: nowrap;
-}
-.container .btn.btn-sm{
-    background: #06f;
-    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.5);
-    color: #fff;
-    outline: none;
-    cursor: pointer;
-    text-shadow: 0 1px #06f;
-    display: inline-block;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 15px;
-    margin-right: 5px;
-}
-.container .btn.btn-sm:active{
-   background: #06f; 
-}
-.heading{
-  color:white;
-  text-align: center;
-}
-label{
-    color: #fff;
-}
-    </style>
-    <!-- Bootstrap -->
-     <link rel="stylesheet" href="style.css">
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
-	</head>
+    body {
+      background: var(--dark-color);
+      color: white;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
     
-	<body style="margin-top:30px;">
-	<div class="container">
-    <div class="heading"><h2>Doodle Dash</h2></div>
-        <p style="font-size: larger;">
-          <button type="button" class="btn btn-outline-primary tool-btn" value="pencil" id="pencil-button">
-            
-            <i class="fa-solid fa-pencil"></i>Pencil
-        </button>
-        <button type="button" class="btn btn-outline-danger tool-btn" value="rect" id="rect-button">
-            <i class="far fa-square"></i> Rectangle
-        </button>
-        <button type="button" class="btn btn-outline-success tool-btn" value="circle" id="circle-button">
-            <i class="far fa-circle"></i> Circle
-        </button>
-        <button type="button" class="btn btn-outline-warning tool-btn" value="ellipse" id="ellipse-button">
-            <i class="fas fa-ellipsis-h"></i> Ellipse
-        </button>
-        <button type="button" class="btn btn-outline-info tool-btn" value="line" id="line-button">
-            <i class="fas fa-slash"></i> Line
-        </button>
-        <button type="button" class="btn btn-outline-dark tool-btn" value="text" id="text-button">
-            <i class="fas fa-font"></i> Text
-        </button>
-        <button type="button" class="btn btn-danger tool-btn" id="clear-all">
-            <i class="fas fa-trash-alt"></i> Clear All
-        </button>
-        <label for="colour" style="position:absolute;">Colour : </label>
-        <input id="colour-picker" value="#000000" style="width:80px;" class="jscolor {width:243, height:150, position:'right',
-    borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#666'}">
-        <!-- <span class="form-group" style="width: 100px;display: inline-block;">
-              <label for="draw-grid">Grid: </label>
-              <select class="form-control" id="draw-grid">
-                <option value="normal">Normal</option>
-                <option value="medium" selected>Medium</option>
-                <option value="large">Large</option>
-                <option value="nogrid">No Grid</option>
-              </select>
-        </span> -->
-        <span class="form-group" style="width: 90px;display: inline-block;">
-          <label for="line-Width">Thickness: </label>
-          <select class="form-control" id="line-Width">
-            <option>2</option>
-            <option>4</option>
-            <option>6</option>
-            <option>8</option>
-            <option>10</option>
-            <option>12</option>
-            <option>14</option>
-          </select>
-        </span>
-         <span class="form-group" style="width: 130px;display: inline-block;">
-          <label for="draw-text-font-family">Font: </label>
-          <select class="form-control" id="draw-text-font-family">
-            <option value="Arial">Arial</option>
-            <option value="Verdana" selected>Verdana</option>
-            <option value="Times New Roman">Times New Roman</option>
-            <option value="Courier New">Courier New</option>
-            <option value="serif">serif</option>
-            <option value="sans-serif">sans-serif</option>
-          </select>
-        </span>
-        <span class="form-group" style="width: 90px;display: inline-block;">
-          <label for="draw-text-font-size">Font Size: </label>
-          <select class="form-control" id="draw-text-font-size">
-            <option value="16">16 Px</option>
-            <option value="18">18 Px</option>
-            <option value="20">20 Px</option>
-            <option value="22">22 Px</option>
-            <option value="24">24 Px</option>
-            <option value="26">26 Px</option>
-            <option value="28">28 Px</option>
-            <option value="30">30 Px</option>
-            <option value="32" selected>32 Px</option>
-            <option value="34">34 Px</option>
-            <option value="36">36 Px</option>
-            <option value="38">38 Px</option>
-            <option value="40">40 Px</option>
-          </select>
-        </span>
-        </p>
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #23272a;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      flex: 1;
+    }
+    
+    .heading {
+      color: white;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    #canvas-container {
+      width: 100%;
+      height: 60vh;
+      min-height: 500px;
+      background-color: white;
+      border-radius: 5px;
+      position: relative;
+      margin-top: 15px;
+      touch-action: none;
+    }
+    
+    #imageView {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: crosshair;
+  width: 100%;
+  height: 100%;
+  background: white;
+}
 
-        <div id="container">
-          <canvas id="imageView" width="1000" height="500">
-            <p>Unfortunately, your browser is currently unsupported by our web
-            application.  We are sorry for the inconvenience. Please use one of the
-            supported browsers listed below, or draw the image you want using an
-            offline tool.</p>
-            <p>Supported browsers: <a href="http://www.opera.com">Opera</a>, <a
-              href="http://www.mozilla.com">Firefox</a>, <a
-              href="http://www.apple.com/safari">Safari</a>, and <a
-              href="http://www.konqueror.org">Konqueror</a>.</p>
-          </canvas>
-        </div>
+    .tool-btn {
+      margin: 5px;
+      font-size: 16px;
+      border-radius: 5px;
+      padding: 8px 15px;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+    }
+    
+    .tool-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .tool-btn.active {
+      border-color: var(--primary-color);
+      background-color: rgba(66, 133, 244, 0.1);
+    }
+    
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .control-group {
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.1);
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    
+    label {
+      color: white;
+      margin-right: 8px;
+      font-weight: 500;
+    }
+    
+    select.form-control {
+      background: #2c2f33;
+      color: white;
+      border: 1px solid #4a4d52;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #aaa;
+      font-size: 0.9em;
+    }
+    
+    footer a {
+      color: #ddd;
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      
+      .tool-btn {
+        padding: 6px 10px;
+        font-size: 14px;
+      }
+      
+      #canvas-container {
+        height: 60vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="heading">
+      <h1>Doodle Dash</h1>
+      <p class="text-muted">Draw together in real-time</p>
     </div>
     
+    <div class="controls-row">
+      <!-- Tools -->
+      <div class="control-group">
+        <button type="button" class="btn btn-outline-primary tool-btn active" 
+        onclick="setTool('pencil')" id="pencil-button">
+  <i class="fa-solid fa-pencil"></i> Pencil
+</button>
+<button type="button" class="btn btn-outline-danger tool-btn" 
+        onclick="setTool('rectangle')" id="rect-button">
+  <i class="far fa-square"></i> Rectangle
+</button>
+<button type="button" class="btn btn-outline-success tool-btn" 
+        onclick="setTool('circle')" id="circle-button">
+  <i class="far fa-circle"></i> Circle
+</button>
+<button type="button" class="btn btn-outline-warning tool-btn" 
+        onclick="setTool('ellipse')" id="ellipse-button">
+  <i class="fas fa-ellipsis-h"></i> Ellipse
+</button>
+<button type="button" class="btn btn-outline-info tool-btn" 
+        onclick="setTool('line')" id="line-button">
+  <i class="fas fa-slash"></i> Line
+</button>
+<button id="button" class="btn btn-outline-info tool-btn" onclick="canvasControls.setTool('text')">Text</button>
+<select id="button" class="btn btn-outline-info tool-btn" onchange="canvasControls.setFontSize(this.value)">
+  <option value="12">12px</option>
+  <option value="16" selected>16px</option>
+  <option value="24">24px</option>
+  <option value="32">32px</option>
+</select>
+<select id="button" class="btn btn-outline-info tool-btn" onchange="canvasControls.setFontFamily(this.value)">
+  <option value="Arial" selected>Arial</option>
+  <option value="Times New Roman">Times</option>
+  <option value="Courier New">Courier</option>
+</select>
+      </div>
+      
+      <!-- Color & Size -->
+      <div class="control-group">
+        <label for="colour-picker">Color:</label>
+        <input type="color" id="colour-picker" value="#000000" 
+       onchange="canvasControls.setColor(this.value)"
+       aria-label="Select drawing color"
+       style="width: 100px; height: 50px;">
+        
+        <label for="line-Width">Size:</label>
+        <select class="form-control" id="line-Width" 
+                onchange="canvasControls.setLineWidth(this.value)">
+          <option>2</option>
+          <option>4</option>
+          <option selected>6</option>
+          <option>8</option>
+          <option>10</option>
+        </select>
+      </div>
+      
+      <!-- Actions -->
+      <div class="control-group">
+        <button type="button" class="btn btn-danger tool-btn" 
+                onclick="canvasControls.clearCanvas()" id="clear-all"
+                aria-label="Clear canvas">
+          <i class="fas fa-trash-alt"></i> Clear
+        </button>
+        <button type="button" class="btn btn-secondary tool-btn" 
+                onclick="canvasControls.undo()" id="undo"
+                aria-label="Undo">
+          <i class="fas fa-undo"></i> Undo
+        </button>
+        <button type="button" class="btn btn-secondary tool-btn" 
+                onclick="canvasControls.redo()" id="redo"
+                aria-label="Redo">
+          <i class="fas fa-redo"></i> Redo
+        </button>
+        <button type="button" class="btn btn-success tool-btn" 
+                onclick="canvasControls.saveDrawing()" id="save"
+                aria-label="Save drawing">
+          <i class="fas fa-download"></i> Save
+        </button>
+      </div>
+    </div>
     
-<!-- Script files -->
-        <script src='jquery.min.js'></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="jscolor/jscolor.min.js"></script>
-        <script src="/socket.io/socket.io.js"></script>
-		 <script src="canvas.js"></script> 
-		<!-- <script src="canvas-backup-latest-v1.js"></script> -->
+    <div id="canvas-container">
+      <canvas id="imageView">
+        <p>Your browser does not support the HTML5 canvas element.</p>
+        <p>Please use a modern browser like Chrome, Firefox, Safari, or Edge.</p>
+      </canvas>
+    </div>
+  </div>
+  
+  <footer style="background: #f5f5f5; padding: 15px 15px; border-top: 1px solid #e0e0e0;">
+    <div style="display: flex; align-items: center; gap: 20px; max-width: 1000px; margin: 0 auto;">
+      <div>
+        <a href="https://www.linkedin.com/in/sheikhwasimuddin">
+          <img src="https://i.ibb.co/rK2npKsd/Whats-App-Image-2025-04-03-at-15-17-44-61527c4f.jpg" 
+               alt="Byte Busters Logo" 
+               style="width: 100px; height: auto; border-radius: 5px; border: 2px solid #333;">
+        </a>
+      </div>
+      <div>
+        <b><h3><p style="margin: 0; font-weight: bold; color: #333;">
+          Created by <br><span style="color: #2a7eab;">Team Byte Busters</span>:<br>
+          <a href="https://www.linkedin.com/in/arpit-dhumane-7a235a278/" style="color: #2a7eab; text-decoration: none;">Arpit Dhumane</a>,
+          <a href="https://www.linkedin.com/in/sheikhwasimuddin" style="color: #2a7eab; text-decoration: none;">Sheikh Wasimuddin</a>,
+          <a href="https://www.linkedin.com/in/tanmaypatil2109/" style="color: #2a7eab; text-decoration: none;">Tanmay Patil</a>,
+          <a href="https://www.linkedin.com/in/tejas-kalbande-71b4a3222/" style="color: #2a7eab; text-decoration: none;">Tejas Kalbande</a>
+        </p>
+        <p style="margin: 5px 0 0 0; font-size: 0.9em; color: #666;">
+          © 2025 Doodle Dash | All Rights Reserved
+        </p></h3></b>
+      </div>
+    </div>
+  </footer>
 
-     <script type="text/javascript">
-      $(document).ready(function(){
-          var board_url = window.location.href;
-          $('.linkToBoard').attr("href",board_url);
+  <!-- Script files -->
+  <script src="jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="canvas.js"></script>
+  <script src="front.js"></script>
+
+  
+  
+  <script>
+    // Initialize tool buttons
+    $(document).ready(function() {
+      // Set active tool
+      $('.tool-btn').click(function() {
+        $('.tool-btn').removeClass('active');
+        $(this).addClass('active');
       });
-    </script>
-
-
-<h3 class="fot">
-  <p>Created by: <a href="https://www.linkedin.com/in/arpit-dhumane-7a235a278/">Arpit Dhumane</a>,
-    <a href="https://www.linkedin.com/in/sheikhwasimuddin">Sheikh Wasimuddin</a>,
-    <a href="https://www.linkedin.com/in/tanmaypatil2109/">Tanmay Patil</a>,
-    <a href="https://www.linkedin.com/in/tejas-kalbande-71b4a3222/">Tejas Kalbande</a>.
-  </p>
-</h3>
-	</body>
-  
-  
-  
+      
+      // Get room ID from URL or generate one
+      const urlParams = new URLSearchParams(window.location.search);
+      let roomId = urlParams.get('room');
+      
+      if (!roomId) {
+        roomId = Math.random().toString(36).substring(2, 8);
+        window.history.replaceState(null, null, `?room=${roomId}`);
+      }
+      
+      // Connect to socket with room ID
+      const socket = io({ query: { roomId } });
+      
+      // Update UI with room info
+      $('.heading p').text(`Room: ${roomId}`);
+      
+      // Share button
+      $('#share-btn').click(function() {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Room link copied to clipboard!');
+      });
+    });
+  </script>
+</body>
 </html>

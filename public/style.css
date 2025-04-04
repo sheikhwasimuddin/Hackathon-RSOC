@@ -1,298 +1,580 @@
-/* Reset margin and padding, full height for body */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-/* Body styles with gradient background */
-body {
-    background: linear-gradient(45deg, rgb(55, 55, 55), rgb(33, 33, 33));
-    font-family: 'Arial', sans-serif;
-    color: #fff;
-    line-height: 1.6;
-}
-
-/* General button styling with hover effects */
-button {
-    background: cyan;
-    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.5);
-    color: #fff;
-    outline: none;
-    cursor: pointer;
-    text-shadow: 0 1px #06f;
-    display: inline-block;
-    font-size: 16px;
-    line-height: 40px;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 25px;
-    margin-left: 20px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-    background-color: white;
-    transform: scale(1.15);
-	transition: 0.5s all ease;
-}
-
-button:active {
-    background-color: #003366;
-}
-
-/* Styling for canvas element */
-canvas {
-    border-radius: 10px;
-    cursor: url(../img/pen.png), crosshair;
-    transition: transform 0.3s ease;
-}
-
-/* Making output look more modern */
-output {
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px;
-    font-weight: bold;
-}
-
-/* Styling unordered list (e.g., for color options) */
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 10px 0;
-    width: 100%;
-    text-align: center;
-}
-
-ul li {
-    display: inline-block;
-    margin: 0 10px;
-}
-
-ul li, #newColor {
-    height: 54px;
-    width: 54px;
-    border-radius: 20px;
-    cursor: pointer;
-    border: 2px solid #fff;
-    box-shadow: 0 3px 0 0 #222;
-    transition: transform 0.3s ease;
-}
-
-ul li:hover, #newColor:hover {
-    transform: scale(1.1);
-}
-
-/* Styling for the color selection box */
-#colorSelect {
-    background: #fff;
-    border-radius: 8px;
-    clear: both;
-    margin: 20px auto;
-    padding: 10px;
-    width: 30%;
-    position: relative;
-    display: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-/* Styling for the color selection dropdown arrow */
-#colorSelect:after {
-    bottom: 100%;
-    left: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(255, 255, 255, 0);
-    border-bottom-color: #fff;
-    border-width: 10px;
-    margin-left: -10px;
-}
-
-/* Styling for color select button */
-#colorSelect button {
-    border: none;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-    border-radius: 0 0 8px 8px;
-    margin: 10px 0;
-    padding: 10px 20px;
-    width: 100%;
-    background: #06f;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#colorSelect button:hover {
-    background-color: #004db3;
-}
-
-/* Container for the drawing board */
-#container {
-    position: relative;
-}
-
-/* Controls bar style */
-#controls {
-    min-height: 60px;
-    width: 90%;
-    margin: 0 auto;
-    border-radius: 8px;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.7);
-}
-
-/* Current color container style */
-#curcolorContainer {
-    text-align: center;
-    padding: 5px 0;
-}
-
-#curcolorContainer div {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-/* Help content modal style */
-#helpContent {
-    display: none;
-    width: 40%;
-    height: 70%;
-    padding: 40px;
-    background-color: #06f;
-    box-shadow: 0 3px 3px 3px rgba(0, 0, 0, 0.5), 3px 0 3px 3px rgba(0, 0, 0, 0.5);
-    text-shadow: 1px 1px 1px #000;
-    color: white;
-    border-radius: 10px;
-    position: absolute;
-    top: 5%;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    font-size: 1.25em;
-    z-index: 1000;
-}
-
-#helpContentX {
-    position: absolute;
-    top: -3%;
-    right: -3%;
-    font-size: 2em;
-    border-radius: 50%;
-    background: red;
-    color: white;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-}
-
-#helpContentX:hover {
-    background: white;
-    color: red;
-}
-
-/* New Color option style */
-#newColor {
-    width: 80px;
-    height: 120px;
-    border-radius: 8px;
-    margin: 10px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-}
-
-#newColor:hover {
-    transform: scale(1.05);
-}
-
-/* Tool belt and size selectors */
-#toolBelt, #toolSize {
-    margin-left: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    height: 50px;
-    background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#toolBelt:hover, #toolSize:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-/* Responsive styles */
-@media screen and (max-width: 1024px) {
-    #colorSelect {
-        width: 50%;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    #colorSelect {
-        width: 70%;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    #colorSelect {
-        width: 90%;
-    }
-}
-
-/* Footer */
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-top: 2px solid #06f;
-    font-size: 14px;
-}
-
-footer a {
-    color: #06f;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
-footer {
-	background-color: #333;
-	color: #fff;
-	text-align: center;
-	padding: 15px;
-	font-size: 14px;
-	width: 100%;
-	border-top: 2px solid #06f;
-}
-
-footer p {
-	margin: 0;
-}
-
-footer a {
-	color: #06f;
-	text-decoration: none;
-}
-
-footer a:hover {
-	text-decoration: underline;
-}
-.fot{
-	color: #ddd;
-	text-align: center;
-
-}
+/* CSS Reset and Base Styles */
+:root {
+    --primary-color: #06f;
+    --secondary-color: cyan;
+    --dark-bg: rgb(33, 33, 33);
+    --light-text: #fff;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --transition-standard: all 0.3s ease;
+    --border-radius-sm: 8px;
+    --border-radius-md: 10px;
+    --border-radius-lg: 20px;
+    --border-radius-round: 25px;
+    --box-shadow-standard: 0 3px 5px rgba(0, 0, 0, 0.3);
+    --box-shadow-elevated: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+  }
+  
+  body {
+      background: linear-gradient(45deg, rgb(55, 55, 55), rgb(33, 33, 33));
+      font-family: 'Arial', sans-serif;
+      color: var(--light-text);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+  }
+  
+  /* Button Styles with Animation */
+  button {
+      background: var(--secondary-color);
+      box-shadow: 0 3px 0 0 var(--shadow-color);
+      color: var(--light-text);
+      outline: none;
+      cursor: pointer;
+      text-shadow: 0 1px var(--primary-color);
+      display: inline-block;
+      font-size: 16px;
+      line-height: 40px;
+      border: none;
+      border-radius: var(--border-radius-round);
+      padding: 0 25px;
+      margin-left: 20px;
+      transition: var(--transition-standard);
+      position: relative;
+      overflow: hidden;
+  }
+  
+  button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.2);
+      transition: width 0.3s ease;
+      z-index: 1;
+  }
+  
+  button:hover {
+      background-color: white;
+      transform: scale(1.15);
+      transition: 0.5s all ease;
+      color: var(--dark-bg);
+      text-shadow: none;
+  }
+  
+  button:hover::before {
+      width: 100%;
+  }
+  
+  button:active {
+      background-color: #003366;
+      transform: scale(1.05);
+      box-shadow: 0 1px 0 0 var(--shadow-color);
+  }
+  
+  /* Canvas Styles */
+  canvas {
+      border-radius: var(--border-radius-md);
+      cursor: url(../img/pen.png), crosshair;
+      transition: transform 0.3s ease;
+      max-width: 100%;
+      box-shadow: var(--box-shadow-elevated);
+  }
+  
+  canvas:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Output Element Styles */
+  output {
+      background: rgba(0, 0, 0, 0.8);
+      color: var(--light-text);
+      border-radius: var(--border-radius-sm);
+      padding: 10px;
+      font-weight: bold;
+      display: inline-block;
+      backdrop-filter: blur(5px);
+  }
+  
+  /* List Styles for Color Options */
+  ul {
+      list-style: none;
+      margin: 0;
+      padding: 10px 0;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+  }
+  
+  ul li {
+      display: inline-block;
+      margin: 0 10px;
+  }
+  
+  ul li, #newColor {
+      height: 54px;
+      width: 54px;
+      border-radius: var(--border-radius-lg);
+      cursor: pointer;
+      border: 2px solid var(--light-text);
+      box-shadow: 0 3px 0 0 #222;
+      transition: transform 0.3s ease;
+      position: relative;
+  }
+  
+  ul li:hover, #newColor:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+      z-index: 2;
+  }
+  
+  ul li:active, #newColor:active {
+      transform: scale(0.95);
+  }
+  
+  /* Color Picker Enhancement */
+  input[type="color"] {
+      
+      border: none;
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+      background: transparent;
+      border-radius: var(--border-radius-lg);
+      border: 3px solid white;
+      transition: var(--transition-standard);
+  }
+  
+  input[type="color"]::-webkit-color-swatch-wrapper {
+      padding: 0;
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+  }
+  
+  input[type="color"]::-webkit-color-swatch {
+      border: none;
+      border-radius: var(--border-radius-lg);
+  }
+  
+  input[type="color"]:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Color Select Panel */
+  #colorSelect {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: var(--border-radius-sm);
+      clear: both;
+      margin: 20px auto;
+      padding: 20px;
+      width: 30%;
+      position: relative;
+      display: none;
+      box-shadow: var(--box-shadow-elevated);
+      backdrop-filter: blur(10px);
+      color: var(--dark-bg);
+      animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translateY(-20px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+  
+  #colorSelect:after {
+      bottom: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-color: rgba(255, 255, 255, 0);
+      border-bottom-color: rgba(255, 255, 255, 0.95);
+      border-width: 10px;
+      margin-left: -10px;
+  }
+  
+  #colorSelect button {
+      border: none;
+      border-radius: var(--border-radius-sm);
+      margin: 10px 0;
+      padding: 10px 20px;
+      width: 100%;
+      background: var(--primary-color);
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-shadow: none;
+      font-weight: bold;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  #colorSelect button:hover {
+      background-color: #004db3;
+      transform: translateY(-2px);
+  }
+  
+  #colorSelect button:active {
+      transform: translateY(1px);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Container Layout */
+  #container {
+      position: relative;
+      flex: 1;
+      padding: 20px;
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+  }
+  
+  /* Controls Bar */
+  #controls {
+      min-height: 60px;
+      width: 90%;
+      margin: 0 auto 20px;
+      border-radius: var(--border-radius-sm);
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 10px;
+      box-shadow: var(--box-shadow-standard);
+  }
+  
+  /* Current Color Container */
+  #curcolorContainer {
+      text-align: center;
+      padding: 10px;
+      border-radius: var(--border-radius-sm);
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+  
+  #curcolorContainer div {
+      font-weight: bold;
+      font-size: 18px;
+  }
+  
+  /* Help Content Modal */
+  #helpContent {
+      display: none;
+      width: 40%;
+      height: auto;
+      max-height: 80vh;
+      padding: 40px;
+      background-color: rgba(0, 102, 255, 0.9);
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+      text-shadow: 1px 1px 1px #000;
+      color: white;
+      border-radius: var(--border-radius-md);
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 1.25em;
+      z-index: 1000;
+      overflow-y: auto;
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      animation: modalFade 0.3s ease forwards;
+  }
+  
+  @keyframes modalFade {
+      from {
+          opacity: 0;
+          transform: translate(-50%, -45%);
+      }
+      to {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+      }
+  }
+  
+  #helpContentX {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      border-radius: 50%;
+      background: red;
+      color: white;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      transition: var(--transition-standard);
+  }
+  
+  #helpContentX:hover {
+      background: white;
+      color: red;
+      transform: rotate(90deg);
+  }
+  
+  /* New Color Option */
+  #newColor {
+      width: 80px;
+      height: 120px;
+      border-radius: var(--border-radius-sm);
+      margin: 10px;
+      box-shadow: var(--box-shadow-standard);
+      transition: transform 0.3s ease;
+  }
+  
+  #newColor:hover {
+      transform: scale(1.05);
+  }
+  
+  /* Tool Belt and Size Selectors */
+  #toolBelt, #toolSize {
+      margin-left: 20px;
+      padding: 15px;
+      border-radius: var(--border-radius-sm);
+      height: 50px;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 3px 0 0 rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  
+  #toolBelt:hover, #toolSize:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+      transform: translateY(-3px);
+  }
+  
+  /* Responsive Styles */
+  @media screen and (max-width: 1200px) {
+      #container {
+          width: 95%;
+      }
+  }
+  
+  @media screen and (max-width: 1024px) {
+      #colorSelect {
+          width: 50%;
+      }
+      #controls {
+          width: 95%;
+      }
+  }
+  
+  @media screen and (max-width: 768px) {
+      #colorSelect {
+          width: 70%;
+      }
+      #helpContent {
+          width: 70%;
+      }
+      button {
+          margin-left: 10px;
+          padding: 0 15px;
+      }
+  }
+  
+  @media screen and (max-width: 480px) {
+      #colorSelect {
+          width: 90%;
+      }
+      #helpContent {
+          width: 90%;
+          padding: 20px;
+      }
+      #controls {
+          flex-direction: column;
+          gap: 10px;
+          align-items: stretch;
+      }
+      button {
+          margin: 5px 0;
+          width: 100%;
+      }
+      ul li {
+          margin: 5px;
+      }
+  }
+  
+  /* Footer Styles */
+  footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      width: 100%;
+      border-top: 2px solid var(--primary-color);
+      font-size: 14px;
+      margin-top: auto;
+  }
+  
+  footer p {
+      margin: 0;
+  }
+  
+  footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      position: relative;
+  }
+  
+  footer a:hover {
+      color: var(--secondary-color);
+  }
+  
+  footer a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--secondary-color);
+      transition: width 0.3s ease;
+  }
+  
+  footer a:hover::after {
+      width: 100%;
+  }
+  
+  .fot {
+      color: #ddd;
+      text-align: center;
+      opacity: 0.8;
+  }
+  
+  /* Dark Mode Toggle */
+  .dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      transition: var(--transition-standard);
+  }
+  
+  .dark-mode-toggle:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(45deg);
+  }
+  
+  /* Animation for Canvas Loading */
+  @keyframes canvasFadeIn {
+      from {
+          opacity: 0;
+          transform: scale(0.95);
+      }
+      to {
+          opacity: 1;
+          transform: scale(1);
+      }
+  }
+  
+  canvas {
+      animation: canvasFadeIn 0.5s ease-out;
+  }
+  
+  /* Preloader */
+  .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--dark-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  
+  .preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+  }
+  
+  .loader {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--secondary-color);
+      animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+      to {
+          transform: rotate(360deg);
+      }
+  }
+  
+  /* Tooltip Styles */
+  [data-tooltip] {
+      position: relative;
+  }
+  
+  [data-tooltip]:before {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 5px 10px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  [data-tooltip]:hover:before {
+      opacity: 1;
+      visibility: visible;
+  }
