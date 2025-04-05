@@ -100,13 +100,13 @@ Push to the branch (git push origin feature/your-feature)
 Open a Pull Request
 
 👥 Team Byte Busters
-Arpit Dhumane
+<a href="https://www.linkedin.com/in/arpit-dhumane-7a235a278/">Arpit Dhumane</a>
 
 <a href="https://www.linkedin.com/in/sheikhwasimuddin/">Sheikh Wasimuddin</a>
 
-Tanmay Patil
+<a href="https://www.linkedin.com/in/tanmaypatil2109/">Tanmay Patil</a>
 
-Tejas Kalbande
+<a href="https://www.linkedin.com/in/tejas-kalbande-71b4a3222/">Tejas Kalbande</a>
 
 
 🙏 Acknowledgments
