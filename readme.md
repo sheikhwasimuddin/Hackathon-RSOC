@@ -72,6 +72,7 @@ Hackathon-RSOC/
 ├── text-tool.js       # Text tool implementation
 ├── package.json       # Project dependencies
 └── README.md          # Project documentation
+
 🎨 How to Use
 Select a tool from the toolbar
 
