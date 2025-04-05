@@ -1,8 +1,6 @@
 # Doodle Dash - Real-Time Collaborative Whiteboard 🎨
 
 
-[![Node.js CI](https://github.com/sheikhwasimuddin/Hackathon-RSOC/actions/workflows/node.js.yml/badge.svg)](https://github.com/sheikhwasimuddin/Hackathon-RSOC/actions/workflows/node.js.yml)
-
 ![Doodle Dash Screenshot](https://i.ibb.co/vvQ8Zt0F/doodle-dash.jpg)
 
 Doodle Dash is a feature-rich, real-time collaborative whiteboard application built for the RSOC Hackathon. It enables multiple users to draw simultaneously with various tools, shapes, and text in a shared digital workspace.
