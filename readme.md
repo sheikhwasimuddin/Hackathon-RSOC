@@ -102,7 +102,7 @@ Open a Pull Request
 👥 Team Byte Busters
 Arpit Dhumane
 
-Sheikh Wasimuddin<a href="https://www.linkedin.com/in/sheikhwasimuddin/">
+<a href="https://www.linkedin.com/in/sheikhwasimuddin/">Sheikh Wasimuddin</a>
 
 Tanmay Patil
 
