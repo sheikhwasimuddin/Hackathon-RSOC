@@ -1,6 +1,6 @@
 # Doodle Dash - Real-Time Collaborative Whiteboard 🎨
 
-[![GitHub license](https://img.shields.io/github/license/sheikhwasimuddin/Hackathon-RSOC)](https://github.com/sheikhwasimuddin/Hackathon-RSOC/blob/main/LICENSE)
+
 [![Node.js CI](https://github.com/sheikhwasimuddin/Hackathon-RSOC/actions/workflows/node.js.yml/badge.svg)](https://github.com/sheikhwasimuddin/Hackathon-RSOC/actions/workflows/node.js.yml)
 
 ![Doodle Dash Screenshot](https://i.ibb.co/vvQ8Zt0F/doodle-dash.jpg)
