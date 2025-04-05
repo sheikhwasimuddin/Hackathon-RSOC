@@ -102,11 +102,13 @@ Open a Pull Request
 👥 Team Byte Busters
 Arpit Dhumane
 
-Sheikh Wasimuddin
+Sheikh Wasimuddin<a href="https://www.linkedin.com/in/sheikhwasimuddin/">
 
 Tanmay Patil
 
 Tejas Kalbande
+
+
 🙏 Acknowledgments
 Socket.IO documentation
 
